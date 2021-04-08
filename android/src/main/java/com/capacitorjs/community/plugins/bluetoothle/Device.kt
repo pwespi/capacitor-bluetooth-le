@@ -155,9 +155,9 @@ class Device(
      * - discover services
      * - request MTU
      */
-    fun connect(callback: (CallbackResponse) -> Unit) {
+    fun connect(autoConnect: Boolean, transport: Int , callback: (CallbackResponse) -> Unit) {
         callbackMap["connect"] = callback
-        bluetoothGatt = device.connectGatt(context, false, gattCallback)
+        bluetoothGatt = device.connectGatt(context, autoConnect, gattCallback, transport)
         connectionState = STATE_CONNECTING
         setConnectionTimeout("connect", "Connection timeout.", bluetoothGatt)
     }
